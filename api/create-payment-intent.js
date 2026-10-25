@@ -5,7 +5,7 @@ import dotenv from "dotenv";
 dotenv.config();
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {
-  apiVersion: '2024-09-30.acacia',
+  apiVersion: '2026-09-30.endive',
 });
 
 
@@ -52,7 +52,7 @@ export default async function createCheckoutSessionHandler(req, res) {
       : lineItems;
 
     const session = await stripe.checkout.sessions.create({
-      payment_method_types: ["card"],
+      allowed_payment_method_types: ["card"],
       mode: "payment",
       customer_email: customerEmail || undefined,
       line_items: adjustedLineItems,
